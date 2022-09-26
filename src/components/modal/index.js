@@ -1,22 +1,22 @@
-import React, {useRef, useMemo, useCallback} from 'react';
-import {View, Text, Button} from 'react-native';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import React, {useRef, useMemo, useCallback} from 'react'
+import {View, Text, Button} from 'react-native'
+import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet'
 
 const Modal = () => {
-  const bottomSheetModalRef = useRef(null);
-  const snapPoints = useMemo(() => ['20%', '100%'], []);
+  const bottomSheetModalRef = useRef(null)
+  const snapPoints = useMemo(() => ['20%', '100%'], [])
 
   const handleOpen = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
+    bottomSheetModalRef.current?.present()
+  }, [])
 
   const handleClose = useCallback(() => {
-    bottomSheetModalRef.current?.close();
-  }, []);
+    bottomSheetModalRef.current?.close()
+  }, [])
 
   const handleSheetChanges = useCallback(index => {
-    console.log('handleSheetChanges', index);
-  }, []);
+    console.log('handleSheetChanges', index)
+  }, [])
 
   return (
     <BottomSheetModalProvider>
@@ -32,7 +32,7 @@ const Modal = () => {
         </View>
       </BottomSheetModal>
     </BottomSheetModalProvider>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal
