@@ -1,37 +1,44 @@
-import React, {useRef, useMemo, useCallback} from 'react'
+import React, {useEffect, useRef} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {clear_space_modal} from '../../store/actions/space'
 import {View, Text, Button} from 'react-native'
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet'
+
+import BottomSheet from '@gorhom/bottom-sheet'
 
 const Modal = () => {
-  const bottomSheetModalRef = useRef(null)
-  const snapPoints = useMemo(() => ['20%', '100%'], [])
+  const dispatch = useDispatch()
+  const modalState = useSelector(state => state.space)
+  const bottomSheetRef = useRef(null)
 
-  const handleOpen = useCallback(() => {
-    bottomSheetModalRef.current?.present()
-  }, [])
+  useEffect(() => {
+    if (modalState.open && bottomSheetRef.current) {
+      bottomSheetRef.current.expand()
+    }
+  }, [modalState])
 
-  const handleClose = useCallback(() => {
-    bottomSheetModalRef.current?.close()
-  }, [])
+  const renderContent = () => {
+    switch (modalState.modalType) {
+      case 0:
+        return <Text>test</Text>
+      default:
+        return <></>
+    }
+  }
 
-  const handleSheetChanges = useCallback(index => {
-    console.log('handleSheetChanges', index)
-  }, [])
+  const onClose = () => {
+    dispatch(clear_space_modal())
+  }
 
   return (
-    <BottomSheetModalProvider>
-      <Button onPress={handleOpen} title="Open" color="red" />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}>
-        <View>
-          <Text>Awesome 🎉</Text>
-          <Button onPress={handleClose} title="Close" color="blue" />
-        </View>
-      </BottomSheetModal>
-    </BottomSheetModalProvider>
+    <BottomSheet
+      ref={bottomSheetRef}
+      snapPoints={['10%', '100%']}
+      index={-1}
+      onClose={onClose}
+      handleHeight={40}
+      enablePanDownToClose>
+      {renderContent()}
+    </BottomSheet>
   )
 }
 
