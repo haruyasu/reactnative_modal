@@ -1,22 +1,23 @@
-import React, {useEffect, useRef, useMemo, useCallback} from 'react'
-import {View, Text, StatusBar, Button} from 'react-native'
+import React from 'react'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
-import HomeScreen from '../home'
-import Modal from '../../components/modal'
+import {BottomTabNavigator} from './BottomTabNavigator'
 import {GestureHandlerRootView} from 'react-native-gesture-handler'
+
+import Modal from '../components/modal'
 
 const Stack = createStackNavigator()
 
-export default function Route() {
+export const RootNavigator = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="BottomTabNavigator"
+          screenOptions={{headerShown: false}}>
           <Stack.Screen
-            name="home"
-            component={HomeScreen}
-            options={{headerShown: false}}
+            name="BottomTabNavigator"
+            component={BottomTabNavigator}
           />
         </Stack.Navigator>
         <Modal />

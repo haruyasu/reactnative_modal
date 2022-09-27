@@ -1,12 +1,10 @@
 import {View, Text} from 'react-native'
 import React from 'react'
 
-const SettingsScreen = () => {
+export const SettingsScreen = () => {
   return (
     <View>
-      <Text>SettingsScreen</Text>
+      <Text className="text-center text-2xl mb-5">Settings</Text>
     </View>
   )
 }
-
-export default SettingsScreen

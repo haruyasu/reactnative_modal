@@ -1,6 +1,6 @@
 import React from 'react'
 import {LogBox} from 'react-native'
-import Route from './src/navigation/main'
+import {RootNavigator} from './src/navigation'
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly'
 import {Provider} from 'react-redux'
@@ -21,7 +21,7 @@ LogBox.ignoreAllLogs()
 const App = () => {
   return (
     <Provider store={store}>
-      <Route />
+      <RootNavigator />
     </Provider>
   )
 }
